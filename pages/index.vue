@@ -4,7 +4,23 @@
             <div class="mode-switch"> <v-btn icon="mdi-theme-light-dark"></v-btn></div>
             <div class='nav-btns-cont'>
                 <v-btn class="text-white mr-4" variant="flat" color="#52525B">How it works ?</v-btn>
-                <v-btn icon="mdi-cog"></v-btn>
+
+                <v-dialog v-model="dialog" width="auto">
+                    <template v-slot:activator="{ props }">
+                        <v-btn v-bind="props" icon="mdi-cog">
+                        </v-btn>
+                    </template>
+
+                    <v-card>
+                        <v-card-text>
+
+                            <settings-comp></settings-comp>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </div>
         </nav>
         <section class="results-cont flex flex-col">
@@ -37,7 +53,8 @@ const currentOperation = computed(() => {
 const inputsNumber = computed(() => addedNumbers.value.length)
 const result = computed(() => addedNumbers.value.reduce((acc, cur) => { return acc += cur }, 0))
 
-
+//settings handling
+const dialog = ref(false)
 
 </script>
 <style>
