@@ -8,21 +8,35 @@
             </div>
         </nav>
         <section class="results-cont flex flex-col">
-            <div class="operation-view">1+23+1</div>
-            <p class="inputs-number">you have entered : 4 inputs</p>
-            <p class="result">25</p>
+            <div class="operation-view"> {{ currentOperation.value }}</div>
+            <p class="inputs-number">you have entered : {{ inputsNumber }} inputs</p>
+            <p class="result">{{ result }}</p>
         </section>
         <section class="btns-cont">
-            <div class="op-btn">C</div>
-            <div class="op-btn">Two</div>
-            <button v-for="num in lists[currrentList]">{{ num }}</button>
+            <button class="op-btn" @click="addedNumbers.splice(0, addedNumbers.length)">C</button>
+            <button class="op-btn" @click="addedNumbers.pop()"><v-icon icon="mdi-backspace-outline"></v-icon></button>
+            <button v-for="num in lists[currrentList]" @click="addedNumbers.push(num)">{{ num
+            }}</button>
         </section>
     </div>
 </template>
 <script setup>
 import { useSettingStore } from '~/store/settingStore';
-
 const { lists, currrentList } = useSettingStore();
+const addedNumbers = ref([]);
+
+//a function that transforms the array to a mathematical operation
+const currentOperation = computed(() => {
+    let str = ref('')
+    addedNumbers.value.forEach((cur, i) => {
+        i === 0 ? str.value = `${cur}` : Math.sign(cur) !== -1 ? str.value += `+${cur}` : str.value += `${cur}`
+    })
+    return str
+})
+//calculate the result and number of inputs
+const inputsNumber = computed(() => addedNumbers.value.length)
+const result = computed(() => addedNumbers.value.reduce((acc, cur) => { return acc += cur }, 0))
+
 
 
 </script>
