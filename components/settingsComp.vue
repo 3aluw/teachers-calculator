@@ -4,7 +4,7 @@
         <section class="presets-cont flex gap-6 flex-wrap">
             <p>Change calculator buttons:</p>
             <div class="flex gap-6 flex-wrap">
-                <button v-for="(list, key, index) in lists" @click="handleListChange(key)">
+                <button v-for="(list, key, index) in settingsStore.lists" @click="handleListChange(key)">
                     <div class="text-2xl pb-2"> {{ listsNames[index] }}</div>
                     <p class="text-xs"> {{ list }}</p>
                 </button>
@@ -24,14 +24,14 @@
 <script setup>
 import { useSettingStore } from '~/store/settingStore';
 
-const { lists, currrentList, usedList } = useSettingStore();
+// didn't work on writing const { lists, currrentList, usedList } = useSettingStore();
 const settingsStore = useSettingStore();
 
 //formats Lists'names 
 const listsNames = computed(() => {
     const regex = /([A-Z])/g;
 
-    const names = Object.keys(lists).map((name) => {
+    const names = Object.keys(settingsStore.lists).map((name) => {
         let nameWithSpace = name.replace(regex, " $1")
         return nameWithSpace.toLocaleLowerCase();
     });
@@ -42,11 +42,7 @@ const listsNames = computed(() => {
 //handles clicks to change the used list from the lists obj
 const handleListChange = (key) => {
     settingsStore.usedList = []
-    settingsStore.usedList = [...lists[key]]
-    console.log(settingsStore.usedList, usedList)
-
-
-
+    settingsStore.usedList = [...settingsStore.lists[key]]
 }
 </script>
 <style>
