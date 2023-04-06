@@ -17,7 +17,7 @@
                             <settings-comp></settings-comp>
                         </v-card-text>
                         <v-card-actions class="justify-evenly">
-                            <v-btn variant="flat" color="teal-accent-4" @click="dialog = false">Apply</v-btn>
+                            <v-btn variant="flat" color="teal-accent-4" @click="applyChanges">Apply</v-btn>
                             <v-btn variant="flat" color="red-accent-4" @click="resetDefault">reset default</v-btn>
 
                         </v-card-actions>
@@ -59,10 +59,20 @@ const result = computed(() => addedNumbers.value.reduce((acc, cur) => { return a
 //dialog logic
 //show settings dialog ?
 const dialog = ref(false)
+
+//close dialog and apply changes
+const applyChanges = () => {
+    dialog.value = false;
+    addedNumbers.value = []
+}
+
 const resetDefault = () => {
     dialog.value = false;
-    settingsStore.$reset()
+    settingsStore.$reset();
+    //reset addedNumbers 
+    addedNumbers.value = []
 }
+
 
 </script>
 <style>

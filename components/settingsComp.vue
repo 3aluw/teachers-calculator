@@ -1,8 +1,8 @@
 <template>
     <div class="settings-container">
-        <v-icon icon="mdi-close-circle-outline"></v-icon>
-        <section class="presets-cont flex gap-6 flex-wrap">
-            <p>Change calculator buttons:</p>
+
+        <section class="presets-cont">
+            <p class="text-xl pb-4 pt-2">Change calculator buttons:</p>
             <div class="flex gap-6 flex-wrap">
                 <button v-for="(list, key, index) in settingsStore.lists" @click="handleListChange(key)">
                     <div class="text-2xl pb-2"> {{ listsNames[index] }}</div>
@@ -10,14 +10,14 @@
                 </button>
             </div>
         </section>
-        <section class="buttons-modify">
-            Customize current buttons :
+        <section class="buttons-modify pb-6">
+            <p class="text-xl py-4 pt-8"> Customize current buttons :</p>
             <div class="btns-cont text-white">
                 <button v-for="(num, index) in settingsStore.usedList">
                     <input type="number" v-model="settingsStore.usedList[index]"></button>
             </div>
         </section>
-        <div class="action-buttons"></div>
+
 
     </div>
 </template>
