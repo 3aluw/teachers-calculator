@@ -31,14 +31,15 @@
         <section class="btns-cont">
             <button class="op-btn" @click="addedNumbers.splice(0, addedNumbers.length)">C</button>
             <button class="op-btn" @click="addedNumbers.pop()"><v-icon icon="mdi-backspace-outline"></v-icon></button>
-            <button v-for="num in lists[currrentList]" @click="addedNumbers.push(num)">{{ num
+            <button v-for="num in settingsStore.usedList" @click="addedNumbers.push(num)">{{ num
             }}</button>
+
         </section>
     </div>
 </template>
 <script setup>
 import { useSettingStore } from '~/store/settingStore';
-const { lists, currrentList } = useSettingStore();
+const settingsStore = useSettingStore();
 const addedNumbers = ref([]);
 
 //a function that transforms the array to a mathematical operation
