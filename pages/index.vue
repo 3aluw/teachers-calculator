@@ -16,8 +16,10 @@
 
                             <settings-comp></settings-comp>
                         </v-card-text>
-                        <v-card-actions>
-                            <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+                        <v-card-actions class="justify-evenly">
+                            <v-btn variant="flat" color="teal-accent-4" @click="dialog = false">Apply</v-btn>
+                            <v-btn variant="flat" color="red-accent-4" @click="resetDefault">reset default</v-btn>
+
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -54,8 +56,13 @@ const currentOperation = computed(() => {
 const inputsNumber = computed(() => addedNumbers.value.length)
 const result = computed(() => addedNumbers.value.reduce((acc, cur) => { return acc += cur }, 0))
 
-//settings handling
+//dialog logic
+//show settings dialog ?
 const dialog = ref(false)
+const resetDefault = () => {
+    dialog.value = false;
+    settingsStore.$reset()
+}
 
 </script>
 <style>
