@@ -1,17 +1,20 @@
 <template>
-    <div class="global-container flex flex-col justify-between">
+    <div class="global-container flex flex-col justify-between" :class="{ light: settingsStore.lightMode }">
+
         <nav class="flex p-6">
-            <div class="mode-switch"> <v-btn icon="mdi-theme-light-dark"></v-btn></div>
+            <div class="mode-switch"> <v-btn icon="mdi-theme-light-dark"
+                    @click="settingsStore.lightMode = !settingsStore.lightMode"></v-btn>
+            </div>
             <div class='nav-btns-cont'>
                 <v-btn class="text-white mr-4" variant="flat" color="#52525B">How it works ?</v-btn>
 
-                <v-dialog v-model="dialog" width="auto">
+                <v-dialog v-model="dialog" width="auto" class="max-w-4xl ">
                     <template v-slot:activator="{ props }">
                         <v-btn v-bind="props" icon="mdi-cog">
                         </v-btn>
                     </template>
 
-                    <v-card>
+                    <v-card :class="{ lightDialog: settingsStore.lightMode }">
                         <v-card-text>
 
                             <settings-comp></settings-comp>
@@ -33,8 +36,9 @@
         <section class="btns-cont">
             <button class="op-btn" @click="addedNumbers.splice(0, addedNumbers.length)">C</button>
             <button class="op-btn" @click="addedNumbers.pop()"><v-icon icon="mdi-backspace-outline"></v-icon></button>
-            <button v-for="num in settingsStore.usedList" @click="addedNumbers.push(num)">{{ num
-            }}</button>
+            <button v-for="(num, index) in settingsStore.usedList" @click="addedNumbers.push(num)"
+                :class="{ blueBtn: (index + 1) % 4 == 0 }">{{ num
+                }}</button>
 
         </section>
     </div>
@@ -42,6 +46,9 @@
 <script setup>
 import { useSettingStore } from '~/store/settingStore';
 const settingsStore = useSettingStore();
+
+
+
 const addedNumbers = ref([]);
 
 //a function that transforms the array to a mathematical operation
@@ -92,6 +99,15 @@ section {
     margin-inline: 1.2rem;
 }
 
+/*settings dialog*/
+.v-card {
+    background: #2E2F38;
+}
+
+.lightDialog {
+    background: #F7F8F4;
+}
+
 /*section 1 */
 .operation-view {
     padding-bottom: 7rem;
@@ -140,5 +156,28 @@ section {
     grid-column: span 2;
     background: rgba(252, 75, 75, 1);
 
+
+}
+
+.blueBtn {
+    background: #4B5EFC;
+}
+
+/*light mode */
+.light {
+    background: #F1F2F3;
+    color: #17171C;
+}
+
+
+
+.light .btns-cont>*:not(.op-btn) {
+    background: white;
+    color: black;
+}
+
+.light .btns-cont>.op-btn {
+
+    color: white;
 }
 </style>

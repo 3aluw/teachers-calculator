@@ -1,7 +1,7 @@
 <template>
-    <div class="settings-container">
+    <div class="settings-container" :class="{ light: settingsStore.lightMode }">
 
-        <section class="presets-cont">
+        <section class="presets-cont text-black">
             <p class="text-xl pb-4 pt-2">Change calculator buttons:</p>
             <div class="flex gap-6 flex-wrap">
                 <button v-for="(list, key, index) in settingsStore.lists" @click="handleListChange(key)">
@@ -11,10 +11,10 @@
             </div>
         </section>
         <section class="buttons-modify pb-6">
-            <p class="text-xl py-4 pt-8"> Customize current buttons :</p>
+            <p class="text-xl py-4 pt-8 "> Customize current buttons :</p>
             <div class="btns-cont text-white">
-                <button v-for="(num, index) in settingsStore.usedList">
-                    <input type="number" v-model="settingsStore.usedList[index]"></button>
+                <button v-for="(num, index) in settingsStore.usedList" class="modify-btns">
+                    <input class="w-full" type="number" v-model="settingsStore.usedList[index]"></button>
             </div>
         </section>
 
@@ -23,8 +23,6 @@
 </template>
 <script setup>
 import { useSettingStore } from '~/store/settingStore';
-
-// didn't work on writing const { lists, currrentList, usedList } = useSettingStore();
 const settingsStore = useSettingStore();
 
 //formats Lists'names 
@@ -45,9 +43,16 @@ const handleListChange = (key) => {
     settingsStore.usedList = [...settingsStore.lists[key]]
 }
 </script>
-<style>
+<style scoped>
+.settings-container {
+    background: #2E2F38;
+    color: white;
+}
+
+
+
 .presets-cont>div>button {
-    background: #D9D9D9;
+    background: #ffffeb;
     padding-block: 0.5rem;
     width: 48%;
 }
@@ -56,6 +61,14 @@ const handleListChange = (key) => {
     background: #71717A;
     color: white;
 }
+
+
+/*customize section */
+.modify-btns {
+    background: #4E505F;
+}
+
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -70,5 +83,24 @@ input:focus {
 
 input {
     text-align: center;
+}
+
+/*light mode */
+.light {
+    background: #F7F8F4;
+}
+
+.light .presets-cont>div>button {
+    background: #D9D9D9;
+    color: black;
+}
+
+.light .buttons-modify {
+    color: black;
+}
+
+.light .buttons-modify .btns-cont>.modify-btns {
+    background: #2E2F38;
+    color: white;
 }
 </style>

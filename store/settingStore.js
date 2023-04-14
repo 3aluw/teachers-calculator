@@ -20,9 +20,10 @@ function $reset() {
   usedList.value = [0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4]
 }
 
+const lightMode = ref(false)
 
   return {
-    currrentList, lists,usedList, $reset
+    currrentList, lists,usedList, $reset, lightMode
   };
 },
 /* Enable this to persist this store : more info : https://prazdevs.github.io/pinia-plugin-persistedstate/frameworks/nuxt-3.html
