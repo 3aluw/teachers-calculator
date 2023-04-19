@@ -3,7 +3,7 @@
 
         <section class="presets-cont ">
             <p class="text-xl pb-4 pt-2 ">Change calculator buttons:</p>
-            <div class="flex gap-6 flex-wrap text-black">
+            <div class="flex gap-6 flex-wrap text-black justify-center">
                 <button v-for="(list, key, index) in settingsStore.lists" @click="handleListChange(key)">
                     <div class="text-2xl pb-2"> {{ listsNames[index] }}</div>
                     <p class="text-xs"> {{ list }}</p>

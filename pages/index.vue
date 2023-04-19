@@ -26,7 +26,7 @@
                                 the individuals keys to meet your needs.</p>
                             <p class="text-2xl pt-8">who created this app ? </p>
                             <p class="pl-4">A solo developper/teacher created this app and it is inspired by <a
-                                    class="text-red-400"
+                                    rel="noreferrer noopener" class="text-red-400"
                                     href="https://play.google.com/store/apps/details?id=club.fikra.teacherscalculator&hl=en_US">this
                                     app</a> if you enjoyed using it and would like to support me, you can do so by clicking
                                 the button below:</p>
@@ -37,8 +37,6 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-
-
 
                 <v-dialog v-model="dialog" width="auto" class="max-w-4xl">
                     <template v-slot:activator="{ props }">
@@ -52,16 +50,16 @@
                             <settings-comp></settings-comp>
                         </v-card-text>
                         <v-card-actions class="justify-evenly">
-                            <v-btn variant="tonal" color="teal-accent-4" @click="applyChanges">Apply</v-btn>
-                            <v-btn variant="tonal" color="red-accent-4" @click="resetDefault">reset default</v-btn>
+                            <v-btn color="teal-accent-4" @click="applyChanges">Apply</v-btn>
+                            <v-btn color="red-accent-4" @click="resetDefault">reset default</v-btn>
 
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
             </div>
         </nav>
-        <section class="results-cont flex flex-col">
-            <div class="operation-view"> {{ currentOperation.value }}</div>
+        <section class="results-cont flex flex-col gap-4">
+            <p class="operation-view"> {{ currentOperation.value }}</p>
             <p class="inputs-number">you have entered : {{ inputsNumber }} inputs</p>
             <p class="result">{{ result }}</p>
         </section>
@@ -87,7 +85,7 @@ const addedNumbers = ref([]);
 const currentOperation = computed(() => {
     let str = ref('')
     addedNumbers.value.forEach((cur, i) => {
-        i === 0 ? str.value = `${cur}` : Math.sign(cur) !== -1 ? str.value += `+${cur}` : str.value += `${cur}`
+        i === 0 ? str.value = `${cur}` : Math.sign(cur) !== -1 ? str.value += ` +${cur}` : str.value += `${cur}`
     })
     return str
 })
@@ -147,13 +145,14 @@ section {
 
 /*section 1 */
 .operation-view {
-    padding-bottom: 7rem;
+    height: 7rem;
+    overflow-y: auto;
     font-family: 'Work Sans';
     font-style: normal;
     font-size: 1.4rem;
     opacity: 0.8;
     font-family: 'Work Sans';
-    height: 1.4rem;
+
 }
 
 .inputs-number {
