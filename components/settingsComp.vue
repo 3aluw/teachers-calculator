@@ -1,9 +1,9 @@
 <template>
     <div class="settings-container" :class="{ light: settingsStore.lightMode }">
 
-        <section class="presets-cont text-black">
-            <p class="text-xl pb-4 pt-2">Change calculator buttons:</p>
-            <div class="flex gap-6 flex-wrap">
+        <section class="presets-cont ">
+            <p class="text-xl pb-4 pt-2 ">Change calculator buttons:</p>
+            <div class="flex gap-6 flex-wrap text-black">
                 <button v-for="(list, key, index) in settingsStore.lists" @click="handleListChange(key)">
                     <div class="text-2xl pb-2"> {{ listsNames[index] }}</div>
                     <p class="text-xs"> {{ list }}</p>
@@ -90,9 +90,14 @@ input {
     background: #F7F8F4;
 }
 
+.light .presets-cont {
+
+    color: black;
+}
+
 .light .presets-cont>div>button {
     background: #D9D9D9;
-    color: black;
+
 }
 
 .light .buttons-modify {

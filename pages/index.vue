@@ -6,9 +6,41 @@
                     @click="settingsStore.lightMode = !settingsStore.lightMode"></v-btn>
             </div>
             <div class='nav-btns-cont'>
-                <v-btn class="text-white mr-4" variant="flat" color="#52525B">How it works ?</v-btn>
 
-                <v-dialog v-model="dialog" width="auto" class="max-w-4xl ">
+                <v-dialog v-model="howItWorks" width="auto" class="max-w-3xl ">
+                    <template v-slot:activator="{ props }">
+                        <v-btn class="text-white mr-4" variant="flat" color="#52525B" v-bind="props">How it works ?</v-btn>
+                    </template>
+
+                    <v-card :class="{ lightDialog: settingsStore.lightMode }">
+                        <v-card-text>
+                            <p class="text-2xl">What is this ? </p>
+                            <p class="pl-4">If you are a teacher calculating grades, an accountant managing finances, or a
+                                budget manager
+                                keeping track of expenses, you may need a fast and efficient method for addition
+                                calculations. This tool is designed to assist you in that regard.</p>
+                            <p class="text-2xl pt-8">How can i customize the keyboard ? </p>
+                            <p class="pl-4">You can do so by clicking on the setting button (on the top right of your
+                                screen), then you
+                                will be able to select an pre-designed sets of keywords. more than that you can customize
+                                the individuals keys to meet your needs.</p>
+                            <p class="text-2xl pt-8">who created this app ? </p>
+                            <p class="pl-4">A solo developper/teacher created this app and it is inspired by <a
+                                    class="text-red-400"
+                                    href="https://play.google.com/store/apps/details?id=club.fikra.teacherscalculator&hl=en_US">this
+                                    app</a> if you enjoyed using it and would like to support me, you can do so by clicking
+                                the button below:</p>
+                        </v-card-text>
+                        <v-card-actions class="justify-evenly">
+                            <v-btn variant="tonal" @click="howItWorks = false">Done</v-btn>
+                            <v-btn variant="tonal" color="teal-accent-4">support me</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+
+
+                <v-dialog v-model="dialog" width="auto" class="max-w-4xl">
                     <template v-slot:activator="{ props }">
                         <v-btn v-bind="props" icon="mdi-cog">
                         </v-btn>
@@ -20,8 +52,8 @@
                             <settings-comp></settings-comp>
                         </v-card-text>
                         <v-card-actions class="justify-evenly">
-                            <v-btn variant="flat" color="teal-accent-4" @click="applyChanges">Apply</v-btn>
-                            <v-btn variant="flat" color="red-accent-4" @click="resetDefault">reset default</v-btn>
+                            <v-btn variant="tonal" color="teal-accent-4" @click="applyChanges">Apply</v-btn>
+                            <v-btn variant="tonal" color="red-accent-4" @click="resetDefault">reset default</v-btn>
 
                         </v-card-actions>
                     </v-card>
@@ -81,6 +113,9 @@ const resetDefault = () => {
 }
 
 
+//How it works dialog
+const howItWorks = ref(false)
+
 </script>
 <style>
 .global-container {
@@ -102,10 +137,12 @@ section {
 /*settings dialog*/
 .v-card {
     background: #2E2F38;
+    color: white;
 }
 
 .lightDialog {
     background: #F7F8F4;
+    color: black;
 }
 
 /*section 1 */
@@ -116,6 +153,7 @@ section {
     font-size: 1.4rem;
     opacity: 0.8;
     font-family: 'Work Sans';
+    height: 1.4rem;
 }
 
 .inputs-number {
@@ -131,6 +169,7 @@ section {
     font-style: normal;
     font-weight: 300;
     font-size: 2.6rem;
+
 }
 
 
@@ -171,13 +210,13 @@ section {
 
 
 
-.light .btns-cont>*:not(.op-btn) {
+.light .btns-cont>*:not(.op-btn, .blueBtn) {
     background: white;
     color: black;
 }
 
-.light .btns-cont>.op-btn {
-
+.light .btns-cont>.op-btn,
+.light .blueBtn {
     color: white;
 }
 </style>
