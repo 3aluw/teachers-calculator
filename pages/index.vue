@@ -1,7 +1,7 @@
 <template>
     <div class="global-container flex flex-col justify-between" :class="{ light: settingsStore.lightMode }">
 
-        <nav class="flex p-6">
+        <nav class="flex p-4">
             <div class="mode-switch"> <v-btn icon="mdi-theme-light-dark"
                     @click="settingsStore.lightMode = !settingsStore.lightMode"></v-btn>
             </div>
@@ -25,7 +25,7 @@
                                 will be able to select an pre-designed sets of keywords. more than that you can customize
                                 the individuals keys to meet your needs.</p>
                             <p class="text-2xl pt-8">who created this app ? </p>
-                            <p class="pl-4">A solo developper/teacher created this app and it is inspired by <a
+                            <p class="pl-4">A solo developer/teacher created this app and it is inspired by <a
                                     rel="noreferrer noopener" class="text-red-400"
                                     href="https://play.google.com/store/apps/details?id=club.fikra.teacherscalculator&hl=en_US">this
                                     app</a> if you enjoyed using it and would like to support me, you can do so by clicking
@@ -145,7 +145,7 @@ section {
 
 /*section 1 */
 .operation-view {
-    height: 7rem;
+    min-height: 6rem;
     overflow-y: auto;
     font-family: 'Work Sans';
     font-style: normal;
@@ -172,7 +172,7 @@ section {
 }
 
 
-/*sction2 */
+/*section2 */
 .btns-cont {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
